@@ -9,13 +9,17 @@ const sContacto ContactoNulo = { "", "", "", "", "", {0, 0, 0}, eGrupo::NINGUNO 
 // enum Agenda { ErrAgenda = -4 };
 enum agrContacto  { ErrAgrEspacio = -1,  ExitoAgregar = 1 };
 enum updContacto  { ErrUpdContacto = -2, ErrUpdIndex = -1,  ExitoModificar = 1 };
-enum rmContacto   { ErrRmNomApe = -3,    ErrRmIndex = -2,   ErrRmContacto = -1, ExitoRemover = 1 };
+enum rmContacto   { ErrRmNomApe = -3,    ErrRmIndex = -2,   ErrRmContacto = -1, ErrRmGrupo = -4, ExitoRemover = 1 };
 enum srchContacto { ErrSrchValor = -2,   ErrSrchIndex = -1, ExitoBuscar = 1 };
+//me creo un enum para impresion de contactos por grupo
+enum prContacto { ErrPrContacto = -1 , ExitoPrint = 1};
 
 typedef enum agrContacto  eAgrContacto;
 typedef enum updContacto  eUpdContacto;
 typedef enum rmContacto   eRmContacto;
 typedef enum srchContacto eSrchContacto;
+//me hago el ty00pedef para ese enum
+typedef enum prContacto ePrContacto;
 
 struct Agenda {
     sContacto* misContactos;
@@ -37,9 +41,14 @@ eUpdContacto actualizarContacto(sAgenda* miAgenda, u_int indexContacto, sContact
 eRmContacto removerContacto(sAgenda* miAgenda, str Nombre, str Apellido);
 eRmContacto removerContacto(sAgenda* miAgenda, sContacto miContacto);
 eRmContacto removerContacto(sAgenda* miAgenda, u_int indexContacto);
+//declaro la funciond de removerContacto pero con grupo
+eRmContacto removerContacto(sAgenda* miAgenda, eGrupo grupoContacto);
+
 
 /* Funciones de busqueda de contacto */
 sContacto buscarContacto(sAgenda* miAgenda, str valorBusqueda);
 sContacto buscarContacto(sAgenda* miAgenda, u_int indexContacto);
+
+ePrContacto ImprimirContacto(sAgenda* miAgenda, eGrupo grupoContacto);
 
 #endif // AGENDA_H

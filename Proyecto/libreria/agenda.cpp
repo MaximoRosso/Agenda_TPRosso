@@ -1,4 +1,5 @@
 #include "agenda.h"
+#include <iostream>
 
 bool hayEspacio(sAgenda* miAgenda) {
     return (miAgenda->CantMaxima - miAgenda->CantContactos > 0);
@@ -130,3 +131,22 @@ sContacto buscarContacto(sAgenda* miAgenda, str valorBusqueda) {
 sContacto buscarContacto(sAgenda* miAgenda, u_int indexContacto) {
     return indexContacto >= miAgenda->CantContactos - 1 ? ContactoNulo : miAgenda->misContactos[indexContacto];
 }
+
+eRmContacto removerContacto(sAgenda* miAgenda, eGrupo grupoContacto) {//ESTA ES LA REMOVER POR GRUPO
+
+    sContacto* aux = miAgenda->misContactos,
+        * ultimo = (miAgenda->misContactos) + miAgenda->CantContactos - 1;// sirve para saber cuantos son porque con esto tengo apuntada la 1era pos y la ultima
+
+       while(true) {
+        if (aux->Grupo == miAgenda->misContactos->Grupo) {//busco el contacto que tenga el mismo grupo que el pasado a la funcion
+            *aux = ContactoNulo;
+            return eRmContacto::ExitoRemover;
+        }
+        if (aux == ultimo)
+            break;
+        aux++;
+    }
+    return eRmContacto::ErrRmGrupo;//?!!!!!!!!!!!!!!????????????????
+}
+
+

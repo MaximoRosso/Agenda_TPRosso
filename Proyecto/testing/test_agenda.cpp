@@ -93,7 +93,10 @@ TEST_CASE("Agenda Eliminacion") {
         eRmContacto res = removerContacto(miAgenda, {"Pedro", "Rodriguez", "Avenida 890", "pedro@example.com", "999-888-7777", {10, 4, 1987},  eGrupo::FAMILIA});
         REQUIRE(res == eRmContacto::ExitoRemover);
     }
-
+    SECTION("Eliminando por grupo Familia"){//ESTA ES LA REMOVER POR GRUPO
+        eRmContacto res = removerContacto(miAgenda, 1);//1 es el grupo "FAMILIA"
+        REQUIRE(res == eRmContacto::ExitoRemover);
+    }
     delete[] miAgenda->misContactos;
     delete miAgenda;
 };
